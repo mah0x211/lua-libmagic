@@ -1,7 +1,7 @@
-lua-magic
+lua-libmagic
 =========
 
-[![test](https://github.com/mah0x211/lua-magic/actions/workflows/test.yml/badge.svg)](https://github.com/mah0x211/lua-magic/actions/workflows/test.yml)
+[![test](https://github.com/mah0x211/lua-libmagic/actions/workflows/test.yml/badge.svg)](https://github.com/mah0x211/lua-libmagic/actions/workflows/test.yml)
 
 
 `libmagic` binding for lua.  
@@ -17,15 +17,15 @@ see `man libmagic` for more details.
 ## Installation
 
 ```sh
-luarocks install mah0x211/magic
+luarocks install libmagic
 ```
 
 
 ## Usage
 
 ```lua
-local magic = require('magic')
-local m = magic.open( magic.MIME_TYPE, magic.NO_CHECK_COMPRESS )
+local libmagic = require('libmagic')
+local m = libmagic.open( libmagic.MIME_TYPE, libmagic.NO_CHECK_COMPRESS )
 assert(m:load()) -- load the default database
 
 print(m:file('README.md'))  -- output "text/plain"
@@ -33,46 +33,46 @@ print(m:file('README.md'))  -- output "text/plain"
 
 ## Constants
 
-`magic` module has the following constants.
+`libmagic` module has the following constants.
 
-- magic.VERSION
-- magic.NONE
-- magic.DEBUG
-- magic.SYMLINK
-- magic.COMPRESS
-- magic.DEVICES
-- magic.MIME_TYPE
-- magic.CONTINUE
-- magic.CHECK
-- magic.PRESERVE_ATIME
-- magic.RAW
-- magic.ERROR
-- magic.MIME_ENCODING
-- magic.MIME
-- magic.APPLE
-- magic.EXTENSION
-- magic.COMPRESS_TRANSP
-- magic.NODESC
-- magic.NO_CHECK_COMPRESS
-- magic.NO_CHECK_TAR
-- magic.NO_CHECK_SOFT
-- magic.NO_CHECK_APPTYPE
-- magic.NO_CHECK_ELF
-- magic.NO_CHECK_TEXT
-- magic.NO_CHECK_CDF
-- magic.NO_CHECK_TOKENS
-- magic.NO_CHECK_ENCODING
-- magic.NO_CHECK_JSON
-- magic.NO_CHECK_ASCII
-- magic.NO_CHECK_FORTRAN
-- magic.NO_CHECK_TROFF
+- libmagic.VERSION
+- libmagic.NONE
+- libmagic.DEBUG
+- libmagic.SYMLINK
+- libmagic.COMPRESS
+- libmagic.DEVICES
+- libmagic.MIME_TYPE
+- libmagic.CONTINUE
+- libmagic.CHECK
+- libmagic.PRESERVE_ATIME
+- libmagic.RAW
+- libmagic.ERROR
+- libmagic.MIME_ENCODING
+- libmagic.MIME
+- libmagic.APPLE
+- libmagic.EXTENSION
+- libmagic.COMPRESS_TRANSP
+- libmagic.NODESC
+- libmagic.NO_CHECK_COMPRESS
+- libmagic.NO_CHECK_TAR
+- libmagic.NO_CHECK_SOFT
+- libmagic.NO_CHECK_APPTYPE
+- libmagic.NO_CHECK_ELF
+- libmagic.NO_CHECK_TEXT
+- libmagic.NO_CHECK_CDF
+- libmagic.NO_CHECK_TOKENS
+- libmagic.NO_CHECK_ENCODING
+- libmagic.NO_CHECK_JSON
+- libmagic.NO_CHECK_ASCII
+- libmagic.NO_CHECK_FORTRAN
+- libmagic.NO_CHECK_TROFF
 
 
-## Create an instance of magic
+## Create an instance of libmagic
 
 ```lua
-local magic = require('magic')
-local m = magic.open(magic.MIME_TYPE)
+local libmagic = require('libmagic')
+local m = libmagic.open(libmagic.MIME_TYPE)
 ```
 
 ## Methods
