@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MODULE_MT "magic"
+#define MODULE_MT "libmagic"
 
 static inline void push_fn2tbl(lua_State *L, const char *k, lua_CFunction f)
 {
@@ -253,7 +253,7 @@ static int open_lua(lua_State *L)
     return 2;
 }
 
-LUALIB_API int luaopen_magic(lua_State *L)
+LUALIB_API int luaopen_libmagic(lua_State *L)
 {
     if (luaL_newmetatable(L, MODULE_MT)) {
         struct luaL_Reg mmethod[] = {

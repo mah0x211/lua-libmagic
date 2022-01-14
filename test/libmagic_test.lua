@@ -1,4 +1,4 @@
-local magic = require('magic')
+local magic = require('libmagic')
 local testcase = require('testcase')
 
 function testcase.getpath()
@@ -11,7 +11,7 @@ end
 function testcase.open()
     -- test that returns instance of magic
     local m = assert(magic.open())
-    assert.match(tostring(m), '^magic: ', false)
+    assert.match(tostring(m), '^libmagic: ', false)
 
     -- test that throws an error with invalid argument
     local err = assert.throws(function()
@@ -38,7 +38,7 @@ function testcase.file()
     assert(m:load())
 
     -- test that returns a textual description of the contents of the filename
-    local res = assert(m:file('./magic_test.lua'))
+    local res = assert(m:file('./libmagic_test.lua'))
     assert.equal(res, 'text/plain')
 
     -- test that returns a textual description of the contents of the filename
@@ -55,7 +55,7 @@ end
 function testcase.buffer()
     local m = assert(magic.open(magic.MIME_TYPE))
     assert(m:load())
-    local f = assert(io.open('./magic_test.lua', 'r'))
+    local f = assert(io.open('./libmagic_test.lua', 'r'))
     local b = assert(f:read('*a'))
     f:close()
 
@@ -73,7 +73,7 @@ end
 function testcase.filehandle()
     local m = assert(magic.open(magic.MIME_TYPE))
     assert(m:load())
-    local f = assert(io.open('./magic_test.lua', 'r'))
+    local f = assert(io.open('./libmagic_test.lua', 'r'))
 
     -- test that returns a textual description of the contents of the filename
     local res = assert(m:filehandle(f))

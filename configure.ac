@@ -1,10 +1,10 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 #
-AC_PREREQ(2.61)
-AC_INIT(magic, 5.25)
+AC_INIT([libmagic], [scm])
+AC_PREREQ([2.61])
 AM_INIT_AUTOMAKE([foreign no-dist no-installinfo no-installman -Wall])
-AC_CONFIG_HEADER([src/config.h])
+AC_CONFIG_HEADERS([src/config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
 #
@@ -17,7 +17,7 @@ AC_DEFINE_UNQUOTED(DEFAULT_LUA_MAGIC_FILE, ["$CONFDIR/magic.mgc"])
 #
 # Checks for programs.
 #
-AC_LANG_C
+AC_LANG([C])
 AC_PROG_CC
 
 #
