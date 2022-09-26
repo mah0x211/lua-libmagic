@@ -1,4 +1,5 @@
 local assert = require('assert')
+local fileno = require('io.fileno')
 local magic = require('libmagic')
 
 local testfuncs = {}
@@ -49,6 +50,25 @@ function testcase.load()
     assert.match(err, '#1 .+ [(]string expected, got table', false)
 end
 
+function testcase.__call()
+    local m = assert(magic.open(magic.MIME_TYPE))
+    assert(m:load())
+
+    -- test that get a mime from filename
+    local res = assert(m('./test/libmagic_test.lua'))
+    assert.equal(res, 'text/plain')
+
+    -- test that get a mime from file*
+    local f = assert(io.open('./test/libmagic_test.lua', 'r'))
+    res = assert(m(f))
+    assert.equal(res, 'text/plain')
+
+    -- test that get a mime from file descriptor
+    local fd = fileno(f)
+    res = assert(m(fd))
+    assert.equal(res, 'text/plain')
+end
+
 function testcase.file()
     local m = assert(magic.open(magic.MIME_TYPE))
     assert(m:load())
@@ -75,7 +95,7 @@ function testcase.buffer()
     local b = assert(f:read('*a'))
     f:close()
 
-    -- test that returns a textual description of the contents of the filename
+    -- test that returns a textual description of the contents of the string
     local res = assert(m:buffer(b))
     assert.equal(res, 'text/plain')
 
@@ -91,7 +111,7 @@ function testcase.filehandle()
     assert(m:load())
     local f = assert(io.open('./test/libmagic_test.lua', 'r'))
 
-    -- test that returns a textual description of the contents of the filename
+    -- test that returns a textual description of the contents of the file*
     local res = assert(m:filehandle(f))
     assert.equal(res, 'text/plain')
 
@@ -100,6 +120,25 @@ function testcase.filehandle()
         m:filehandle({})
     end)
     assert.match(err, '#1 .+ [(]FILE%* expected, got table', false)
+
+    f:close()
+end
+
+function testcase.descriptor()
+    local m = assert(magic.open(magic.MIME_TYPE))
+    assert(m:load())
+    local f = assert(io.open('./test/libmagic_test.lua', 'r'))
+    local fd = fileno(f)
+
+    -- test that returns a textual description of the contents of the file descriptor
+    local res = assert(m:descriptor(fd))
+    assert.equal(res, 'text/plain')
+
+    -- test that throws an error with invalid a
+    local err = assert.throws(function()
+        m:descriptor({})
+    end)
+    assert.match(err, '#1 .+ [(]number expected, got table', false)
 
     f:close()
 end

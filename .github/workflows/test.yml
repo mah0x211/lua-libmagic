@@ -33,6 +33,7 @@ jobs:
       run: |
         sudo apt install libmagic-dev -y
         luarocks install assert
+        luarocks install io-fileno
     -
       name: Install
       run: |

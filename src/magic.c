@@ -191,6 +191,26 @@ static int errno_lua(lua_State *L)
     return 1;
 }
 
+static int call_lua(lua_State *L)
+{
+    lmagic_t *magic = lua_touserdata(L, 1);
+    int t           = lua_type(L, 2);
+
+    switch (t) {
+    case LUA_TSTRING:
+        return file_lua(L);
+    case LUA_TNUMBER:
+        return descriptor_lua(L);
+    case LUA_TUSERDATA:
+        return filehandle_lua(L);
+    default: {
+        const char *extramsg = lua_pushfstring(
+            L, "string, number or file* expected, got %s", lua_typename(L, t));
+        return luaL_argerror(L, 2, extramsg);
+    }
+    }
+}
+
 static int gc_lua(lua_State *L)
 {
     lmagic_t *magic = lua_touserdata(L, 1);
@@ -257,6 +277,7 @@ LUALIB_API int luaopen_libmagic(lua_State *L)
             {"__gc",       gc_lua      },
             {"__tostring", tostring_lua},
             {"__newindex", newindex_lua},
+            {"__call",     call_lua    },
             {NULL,         NULL        }
         };
         struct luaL_Reg method[] = {

@@ -75,6 +75,25 @@ local libmagic = require('libmagic')
 local m = libmagic.open(libmagic.MIME_TYPE)
 ```
 
+## Metamethods
+
+### str, err = m( arg )
+
+helper function to get a textual description of the contents of the file.
+
+**Parameters**
+
+- `arg:string|integer|file*`: pathname or file descriptor or file handle of the file.
+  - `arg:string`: equivalent to `m:file( pathname )`.
+  - `arg:integer`: equivalent to `m:descriptor( fd )`.
+  - `arg:file*`: equivalent to `m:filehandle( fh )`.
+
+**Returns**
+
+- `str:string`: a textual description.
+- `err:string`: error string.
+
+
 ## Methods
 
 ### str, err = m:file( pathname )
