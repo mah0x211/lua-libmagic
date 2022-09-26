@@ -24,13 +24,13 @@
  *
  *  Created by Masatoshi Teruya on 13/04/09.
  */
-#include "magic.h"
-#include "config.h"
 #include <errno.h>
 #include <lauxlib.h>
 #include <lualib.h>
 #include <stdio.h>
 #include <string.h>
+// libmagic header
+#include <magic.h>
 
 #define MODULE_MT "libmagic"
 
@@ -164,8 +164,7 @@ static inline int patharg_lua(lua_State *L, patharg_fn fn, const char *path)
 
 static int load_lua(lua_State *L)
 {
-    return patharg_lua(L, &magic_load,
-                       luaL_optstring(L, 2, DEFAULT_LUA_MAGIC_FILE));
+    return patharg_lua(L, &magic_load, luaL_optstring(L, 2, NULL));
 }
 
 static int compile_lua(lua_State *L)
@@ -175,14 +174,12 @@ static int compile_lua(lua_State *L)
 
 static int check_lua(lua_State *L)
 {
-    return patharg_lua(L, &magic_check,
-                       luaL_optstring(L, 2, DEFAULT_LUA_MAGIC_FILE));
+    return patharg_lua(L, &magic_check, luaL_optstring(L, 2, NULL));
 }
 
 static int list_lua(lua_State *L)
 {
-    return patharg_lua(L, &magic_list,
-                       luaL_optstring(L, 2, DEFAULT_LUA_MAGIC_FILE));
+    return patharg_lua(L, &magic_list, luaL_optstring(L, 2, NULL));
 }
 
 static int errno_lua(lua_State *L)
@@ -217,7 +214,7 @@ static int newindex_lua(lua_State *L)
 
 static int getpath_lua(lua_State *L)
 {
-    const char *filename = magic_getpath(DEFAULT_LUA_MAGIC_FILE, 0);
+    const char *filename = magic_getpath(NULL, 0);
 
     if (filename) {
         lua_pushstring(L, filename);
