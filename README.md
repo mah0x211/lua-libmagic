@@ -9,6 +9,10 @@ see `man libmagic` for more details.
 
 ***
 
+**NOTE: this module is tested with libmagic v5.41.**
+
+***
+
 ## Dependencies
 
 - libmagic: https://github.com/file/file
