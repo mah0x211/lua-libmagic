@@ -12,7 +12,8 @@ jobs:
           - "5.2"
           - "5.3"
           - "5.4"
-
+          - "luajit-2.0.5"
+          - "luajit-openresty"
     steps:
     -
       name: Checkout
@@ -26,11 +27,12 @@ jobs:
         luaVersion: ${{ matrix.lua-version }}
     -
       name: Setup Luarocks
-      uses: leafo/gh-actions-luarocks@v4.0.0
+      uses: leafo/gh-actions-luarocks@v4
     -
       name: Install Tools
       run: |
-        luarocks install testcase
+        sudo apt install libmagic-dev -y
+        luarocks install assert
     -
       name: Install
       run: |
@@ -38,4 +40,14 @@ jobs:
     -
       name: Run Test
       run: |
-        testcase ./test
+        lua ./test/libmagic_test.lua
+    # -
+    #   name: Generate coverage reports
+    #   run: |
+    #     sh ./covgen.sh
+    # -
+    #   name: Upload coverage to Codecov
+    #   uses: codecov/codecov-action@v2
+    #   with:
+    #     files: ./coverage/lcov.info
+    #     flags: unittests
