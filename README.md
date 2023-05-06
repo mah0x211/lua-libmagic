@@ -2,7 +2,7 @@ lua-libmagic
 =========
 
 [![test](https://github.com/mah0x211/lua-libmagic/actions/workflows/test.yml/badge.svg)](https://github.com/mah0x211/lua-libmagic/actions/workflows/test.yml)
-
+[![codecov](https://codecov.io/gh/mah0x211/lua-libmagic/branch/master/graph/badge.svg)](https://codecov.io/gh/mah0x211/lua-libmagic)
 
 `libmagic` binding for lua.  
 see `man libmagic` for more details.

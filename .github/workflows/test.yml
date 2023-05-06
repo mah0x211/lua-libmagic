@@ -31,24 +31,24 @@ jobs:
     -
       name: Install Tools
       run: |
-        sudo apt install libmagic-dev -y
+        sudo apt install libmagic-dev lcov -y
         luarocks install assert
         luarocks install io-fileno
     -
       name: Install
       run: |
-        luarocks make
+        luarocks make LIBMAGIC_COVERAGE=1
     -
       name: Run Test
       run: |
         lua ./test/libmagic_test.lua
-    # -
-    #   name: Generate coverage reports
-    #   run: |
-    #     sh ./covgen.sh
-    # -
-    #   name: Upload coverage to Codecov
-    #   uses: codecov/codecov-action@v2
-    #   with:
-    #     files: ./coverage/lcov.info
-    #     flags: unittests
+    -
+      name: Generate coverage reports
+      run: |
+        sh ./covgen.sh
+    -
+      name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./coverage/lcov.info
+        flags: unittests
