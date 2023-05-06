@@ -17,6 +17,7 @@ see `man libmagic` for more details.
 
 - libmagic: https://github.com/file/file
 
+you should be installed `libmagic-dev` or equivalent package before install this module.
 
 ## Installation
 
@@ -79,9 +80,7 @@ local libmagic = require('libmagic')
 local m = libmagic.open(libmagic.MIME_TYPE)
 ```
 
-## Metamethods
-
-### str, err = m( arg )
+## str, err = m( arg )
 
 helper function to get a textual description of the contents of the file.
 
@@ -98,9 +97,7 @@ helper function to get a textual description of the contents of the file.
 - `err:string`: error string.
 
 
-## Methods
-
-### str, err = m:file( pathname )
+## str, err = m:file( pathname )
 
 returns a textual description of the contents of the file.
 
@@ -114,7 +111,7 @@ returns a textual description of the contents of the file.
 - `err:string`: error string.
 
 
-### str, err = m:descriptor( fd )
+## str, err = m:descriptor( fd )
 
 returns a textual description of the contents of the file descriptor.
 
@@ -128,7 +125,7 @@ returns a textual description of the contents of the file descriptor.
 - `err:string`: error string.
 
 
-### str, err = m:filehandle( fh )
+## str, err = m:filehandle( fh )
 
 returns a textual description of the contents of the filehandle.
 
@@ -142,7 +139,7 @@ returns a textual description of the contents of the filehandle.
 - `err:string`: error string.
 
 
-### str, err= m:buffer( buf:string )
+## str, err= m:buffer( buf:string )
 
 returns a textual description of the contents of the buffer.
 
@@ -156,7 +153,7 @@ returns a textual description of the contents of the buffer.
 - `err:string`: error string.
 
 
-### err = m:error()
+## err = m:error()
 
 returns a textual explanation of the last error.
 
@@ -165,7 +162,7 @@ returns a textual explanation of the last error.
 - `err:string`: error string.
 
 
-### ok = m:setflags( [flag, ...] )
+## ok = m:setflags( [flag, ...] )
 
 set flags.
 
@@ -174,7 +171,7 @@ set flags.
 - `ok:boolean`: `true` on success.
 
 
-### ok, err = m:load( [pathnames:string] )
+## ok, err = m:load( [pathnames:string] )
 
 loads the database files from the colon separated list of database files.
 
@@ -188,7 +185,7 @@ loads the database files from the colon separated list of database files.
 - `err:string`: error string.
 
 
-### ok, err = m:compile( pathnames:string )
+## ok, err = m:compile( pathnames:string )
 
 compile the colon separated list of database files.
 
@@ -202,7 +199,7 @@ compile the colon separated list of database files.
 - `err:string`: error string.
 
 
-### ok, err = m:check( [pathnames:string] )
+## ok, err = m:check( [pathnames:string] )
 
 check the validity of entries in the colon separated database files.
 
@@ -216,7 +213,7 @@ check the validity of entries in the colon separated database files.
 - `err:string`: error string.
 
 
-### ok, err = m:list( [pathnames:string] )
+## ok, err = m:list( [pathnames:string] )
 
 dumps all magic entries in a human readable format
 
@@ -226,7 +223,7 @@ dumps all magic entries in a human readable format
 - `err:string`: error string.
 
 
-### errno = m:errno()
+## errno = m:errno()
 
 returns the last operating system error number.
 
