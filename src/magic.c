@@ -193,8 +193,7 @@ static int errno_lua(lua_State *L)
 
 static int call_lua(lua_State *L)
 {
-    lmagic_t *magic = lua_touserdata(L, 1);
-    int t           = lua_type(L, 2);
+    int t = lua_type(L, 2);
 
     switch (t) {
     case LUA_TSTRING:
