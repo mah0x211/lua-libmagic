@@ -22,5 +22,4 @@ $(TARGET): $(OBJS)
 install:
 	$(INSTALL) -d $(INST_LIBDIR)
 	$(INSTALL) $(TARGET) $(INST_LIBDIR)
-	$(INSTALL) -d $(INST_LUADIR)/pipe
 	rm -f $(OBJS) $(TARGET) $(GCDAS)
