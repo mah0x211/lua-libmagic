@@ -66,8 +66,7 @@ static int file_lua(lua_State *L)
     // got error
     lua_pushnil(L);
     lua_pushstring(L, magic_error(magic->mgc));
-
-    return 1;
+    return 2;
 }
 
 static int descriptor_lua(lua_State *L)
@@ -76,7 +75,6 @@ static int descriptor_lua(lua_State *L)
     int fd          = luaL_checkinteger(L, 2);
 
     lua_pushstring(L, magic_descriptor(magic->mgc, fd));
-
     return 1;
 }
 
@@ -92,7 +90,6 @@ static int filehandle_lua(lua_State *L)
 #endif
 
     lua_pushstring(L, magic_descriptor(magic->mgc, fileno(fp)));
-
     return 1;
 }
 
@@ -111,7 +108,6 @@ static int buffer_lua(lua_State *L)
     // got error
     lua_pushnil(L);
     lua_pushstring(L, magic_error(magic->mgc));
-
     return 2;
 }
 
@@ -125,7 +121,6 @@ static int error_lua(lua_State *L)
     } else {
         lua_pushnil(L);
     }
-
     return 1;
 }
 
@@ -158,8 +153,7 @@ static inline int patharg_lua(lua_State *L, patharg_fn fn, const char *path)
     // got error
     lua_pushboolean(L, 0);
     lua_pushstring(L, magic_error(magic->mgc));
-
-    return 1;
+    return 2;
 }
 
 static int load_lua(lua_State *L)
@@ -213,9 +207,7 @@ static int call_lua(lua_State *L)
 static int gc_lua(lua_State *L)
 {
     lmagic_t *magic = lua_touserdata(L, 1);
-
     magic_close(magic->mgc);
-
     return 0;
 }
 
@@ -240,7 +232,6 @@ static int getpath_lua(lua_State *L)
     } else {
         lua_pushnil(L);
     }
-
     return 1;
 }
 
@@ -265,7 +256,6 @@ static int open_lua(lua_State *L)
     // got error
     lua_pushnil(L);
     lua_pushstring(L, strerror(errno));
-
     return 2;
 }
 
