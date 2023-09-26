@@ -55,11 +55,11 @@ function testcase.__call()
     assert(m:load())
 
     -- test that get a mime from filename
-    local res = assert(m('./test/libmagic_test.lua'))
+    local res = assert(m('./test/test.txt'))
     assert.equal(res, 'text/plain')
 
     -- test that get a mime from file*
-    local f = assert(io.open('./test/libmagic_test.lua', 'r'))
+    local f = assert(io.open('./test/test.txt', 'r'))
     res = assert(m(f))
     assert.equal(res, 'text/plain')
 
@@ -74,7 +74,7 @@ function testcase.file()
     assert(m:load())
 
     -- test that returns a textual description of the contents of the filename
-    local res = assert(m:file('./test/libmagic_test.lua'))
+    local res = assert(m:file('./test/test.txt'))
     assert.equal(res, 'text/plain')
 
     -- test that returns a textual description of the contents of the filename
@@ -91,7 +91,7 @@ end
 function testcase.buffer()
     local m = assert(magic.open(magic.MIME_TYPE))
     assert(m:load())
-    local f = assert(io.open('./test/libmagic_test.lua', 'r'))
+    local f = assert(io.open('./test/test.txt', 'r'))
     local b = assert(f:read('*a'))
     f:close()
 
@@ -109,7 +109,7 @@ end
 function testcase.filehandle()
     local m = assert(magic.open(magic.MIME_TYPE))
     assert(m:load())
-    local f = assert(io.open('./test/libmagic_test.lua', 'r'))
+    local f = assert(io.open('./test/test.txt', 'r'))
 
     -- test that returns a textual description of the contents of the file*
     local res = assert(m:filehandle(f))
@@ -127,7 +127,7 @@ end
 function testcase.descriptor()
     local m = assert(magic.open(magic.MIME_TYPE))
     assert(m:load())
-    local f = assert(io.open('./test/libmagic_test.lua', 'r'))
+    local f = assert(io.open('./test/test.txt', 'r'))
     local fd = fileno(f)
 
     -- test that returns a textual description of the contents of the file descriptor
