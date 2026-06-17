@@ -1,3 +1,4 @@
+rockspec_format = "3.0"
 package = "libmagic"
 version = "scm-1"
 source = {
@@ -18,19 +19,33 @@ external_dependencies = {
         library = "magic",
     },
 }
+build_dependencies = {
+    "luarocks-build-hooks >= 0.8.0",
+}
 build = {
-    type = "make",
-    build_variables = {
-        CFLAGS = "$(CFLAGS)",
-        WARNINGS = "-Wall -Wno-trigraphs -Wmissing-field-initializers -Wreturn-type -Wmissing-braces -Wparentheses -Wno-switch -Wunused-function -Wunused-label -Wunused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wunknown-pragmas -Wshadow -Wsign-compare",
-        CPPFLAGS = "-I$(LUA_INCDIR) -I$(LIBMAGIC_INCDIR)",
-        LDFLAGS = "$(LIBFLAG) -L$(LIBMAGIC_LIBDIR) -lmagic",
-        LIB_EXTENSION = "$(LIB_EXTENSION)",
-        LIBMAGIC_COVERAGE = "$(LIBMAGIC_COVERAGE)",
+    type = "hooks",
+    before_build = "$(extra-vars)",
+    extra_variables = {
+        CFLAGS = "-Wall -Wno-trigraphs -Wmissing-field-initializers -Wreturn-type -Wmissing-braces -Wparentheses -Wno-switch -Wunused-function -Wunused-label -Wunused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wunknown-pragmas -Wshadow -Wsign-compare",
     },
-    install_variables = {
-        LIB_EXTENSION = "$(LIB_EXTENSION)",
-        INST_LIBDIR = "$(LIBDIR)",
-        INST_LUADIR = "$(LUADIR)",
+    conditional_variables = {
+        LIBMAGIC_COVERAGE = {
+            CFLAGS = "--coverage",
+            LIBFLAG = "--coverage",
+        },
+    },
+    modules = {
+        libmagic = {
+            sources = "src/magic.c",
+            incdirs = {
+                "$(LIBMAGIC_INCDIR)",
+            },
+            libdirs = {
+                "$(LIBMAGIC_LIBDIR)",
+            },
+            libraries = {
+                "magic",
+            },
+        },
     },
 }

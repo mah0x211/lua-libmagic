@@ -24,13 +24,15 @@
  *
  *  Created by Masatoshi Teruya on 13/04/09.
  */
-#include <errno.h>
+// depend
+#include <magic.h>
+// lua
 #include <lauxlib.h>
 #include <lualib.h>
+// system
+#include <errno.h>
 #include <stdio.h>
 #include <string.h>
-// libmagic header
-#include <magic.h>
 
 #define MODULE_MT "libmagic"
 
