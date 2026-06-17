@@ -13,18 +13,22 @@ description = {
 dependencies = {
     "lua >= 5.1",
 }
-external_dependencies = {
-    LIBMAGIC = {
-        header = "magic.h",
-        library = "magic",
-    },
-}
+external_dependencies = {}
 build_dependencies = {
     "luarocks-build-hooks >= 0.8.0",
 }
 build = {
     type = "hooks",
-    before_build = "$(extra-vars)",
+    before_build = {
+        "$(pkgconfig)",
+        "$(extra-vars)",
+    },
+    pkgconfig_dependencies = {
+        LIBMAGIC = {
+            header = "magic.h",
+            library = "magic",
+        },
+    },
     extra_variables = {
         CFLAGS = "-Wall -Wno-trigraphs -Wmissing-field-initializers -Wreturn-type -Wmissing-braces -Wparentheses -Wno-switch -Wunused-function -Wunused-label -Wunused-parameter -Wunused-variable -Wunused-value -Wuninitialized -Wunknown-pragmas -Wshadow -Wsign-compare",
     },
@@ -44,7 +48,7 @@ build = {
                 "$(LIBMAGIC_LIBDIR)",
             },
             libraries = {
-                "magic",
+                "$(LIBMAGIC_LIB)",
             },
         },
     },
